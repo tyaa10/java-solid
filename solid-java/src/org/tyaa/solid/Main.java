@@ -1,12 +1,16 @@
 package org.tyaa.solid;
 
 import org.tyaa.solid.d.IntegerSort;
+import org.tyaa.solid.d.Student;
+import org.tyaa.solid.d.UniSort;
 import org.tyaa.solid.l.OrderStockAndPackValidator;
 import org.tyaa.solid.o.OrderProcessorWithPreAndPostProcessing;
 import org.tyaa.solid.s.OrderProcessor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 /*
 * What is Clean Code
@@ -66,20 +70,77 @@ public class Main {
 
         // Bubble Sort
 
-        List<Integer> integers =
+        /* List<Integer> integers =
                 new ArrayList<>();
         integers.add(1);
+        integers.add(-23);
         integers.add(56);
         integers.add(-4);
         integers.add(0);
-        integers.add(10);
-        integers.forEach(System.out::println);
+        integers.add(-22);
+        integers.add(10); */
+
+        /* integers.forEach(System.out::println);
         IntegerSort.sort(integers);
         System.out.println("Sorted List:");
-        integers.forEach(System.out::println);
+        integers.forEach(System.out::println); */
 
         // Let's make sort method universal!
         // (Can apply to List of any elements - Integer, Double, String, Custom Types, etc.)
         // - add second argument: sort(ArrayList list, ICompareRule rule)
+
+        /* integers.forEach(System.out::println);
+        UniSort.sort(
+                integers,
+                (o1, o2) -> (Integer)o2 - (Integer)o1
+        );
+        System.out.println("Sorted List:");
+        integers.forEach(System.out::println); */
+
+        List<String> strings =
+                new ArrayList<>();
+        strings.add("John");
+        strings.add("Bill");
+        strings.add("Vasilii");
+        strings.add("Maria");
+        strings.add("Yurii");
+        strings.add("Fedor");
+        strings.add("Hidejuki");
+
+        strings.forEach(System.out::println);
+        UniSort.sort(
+                strings,
+                (o1, o2) -> ((String)o1).compareTo((String)o2)
+        );
+        System.out.println("Sorted List:");
+        strings.forEach(System.out::println);
+
+        // System.out.println((int)(Math.random() * (76 + 1)) + 16);
+
+        List<Student> students =
+            strings.stream()
+                .map(s -> new Student(
+                        s,
+                        "...",
+                        (int)(Math.random() * (44 + 1) + 16),
+                        (Math.random() * (19 + 1)) + 7))
+                .collect(Collectors.toList());
+
+        students.forEach(System.out::println);
+        UniSort.sort(
+            students,
+            (o1, o2) -> ((Student)o1).age - ((Student)o2).age
+        );
+        System.out.println("Sorted List:");
+        students.forEach(System.out::println);
+
+        // TODO apply quickSort
+        students.forEach(System.out::println);
+        UniSort.quickSort(
+                students,
+                (o1, o2) -> ((Student)o1).age - ((Student)o2).age
+        );
+        System.out.println("Sorted List:");
+        students.forEach(System.out::println);
     }
 }
