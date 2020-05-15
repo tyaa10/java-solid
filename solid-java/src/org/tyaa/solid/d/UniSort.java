@@ -25,5 +25,6 @@ public class UniSort {
     // then change method's name 'quickSort'
     public static void quickSort(List items, ICompareRule rule){
         // TODO
+	// Test 1
     }
 }
